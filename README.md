@@ -7,4 +7,7 @@
 >    - Load audio source from server and play it.
 
 ## Website template
-<img src="https://github.com/AmousQiu/AudioRecorder/blob/master/audioScreenshot.jpg" alt="drawing" width="200"/>         
+<img src="https://github.com/AmousQiu/UnityAssetsAPI/blob/master/Screenshots/MusicServerHomepage.PNG" width="300"/>   
+
+## App UI
+<img src="https://github.com/AmousQiu/AudioRecorder/blob/master/audioScreenshot.jpg" alt="audio Screenshot" width="300"/>         
