@@ -7,4 +7,4 @@
 >    - Load audio source from server and play it.
 
 ## Website template
-![audio server screenshot]  ()          
+![alt text](https://github.com/AmousQiu/AudioRecorder/blob/master/audioScreenshot.jpg "Logo Title Text 1")         
