@@ -17,8 +17,11 @@
 /*FILE INTRODUTION PART 
   * ------------------------------------------------------------------------------------------
   *FileName: SavWav.cs
-  *Function: -
+  *Function: -Save wav file to local
+  *          -Upload wav file to server
+  *          -Insert filename into database
 */
+
 using System;
 using System.IO;
 using System.Text;
@@ -29,7 +32,7 @@ public static class SavWav
     private const uint HeaderSize = 44;
     private const float RescaleFactor = 32767; //to convert float to Int16
 
-//Save the wav file to local
+    //Save the wav file to local
     public static void Save(string filename, AudioClip clip, bool trim = false)
     {
         if (!filename.ToLower().EndsWith(".wav"))

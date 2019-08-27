@@ -58,14 +58,9 @@ public class LoadMusic : MonoBehaviour
     private IEnumerator LoadAudio()
     {
         UnityWebRequest www=GetAudioFromFile(soundPath);
-         
-        //WWW request = GetAudioFromFile(soundPath);
-
         yield return www;
-        
         audioClip = DownloadHandlerAudioClip.GetContent(www);
         audioClip.name = "test.wav";
-
         PlayAudioFile();
     }
 

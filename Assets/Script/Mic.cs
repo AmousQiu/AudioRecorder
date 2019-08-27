@@ -17,7 +17,7 @@
 /*FILE INTRODUTION PART 
   * ------------------------------------------------------------------------------------------
   *FileName: Mic.cs
-  *Function: -
+  *Function: -the function to be called
 */
 using UnityEngine;
 using System.Collections;
@@ -29,13 +29,9 @@ public class Mic : MonoBehaviour
     AudioClip myAudioClip;
     public AudioSource test;
     public InputField nameInput;
-
     public InputField timeInput;
-
     public GameObject recordButton;
-
     public Text showText;
-
     public string musicName;
 
     void Start() {
@@ -49,17 +45,17 @@ public class Mic : MonoBehaviour
         }
     }
   
+   //start recording for specific time
     public void Record(){
         myAudioClip = Microphone.Start(null, false,int.Parse(timeInput.text) , 44100);
     }
 
-    public void End(){
-        Microphone.End(null);
-    }
+    //save to local
     public void Save(){
         SavWav.Save("test",myAudioClip);
     }
 
+    //upload to server
     public void upload(){
         if(SavWav.uploadToServer(nameInput.text,myAudioClip)=="success"){
            showText.text="Successfully upload "+nameInput.text+".wav";
@@ -70,6 +66,7 @@ public class Mic : MonoBehaviour
     }
     
 
+   //test demo 
     public void playMusic(){
         LoadMusic();
     }
