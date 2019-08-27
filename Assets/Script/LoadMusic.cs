@@ -17,8 +17,7 @@
 /*FILE INTRODUTION PART 
   * ------------------------------------------------------------------------------------------
   *FileName: LoadMusic.cs
-  *Function: -show all the photos existing in the folder.
-  *!!!!!!Needs rewrite.
+  *Function: -
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -30,30 +29,30 @@ using UnityEngine.UI;
 public class LoadMusic : MonoBehaviour
 {
     public AudioSource audioSource;
+
     public AudioClip audioClip;
 
     public GameObject musicButton;
+
     public string soundPath;
 
 
     private void Awake()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
-        //local path
-        //soundPath = Path.Combine(Application.persistentDataPath, "test.wav");
-        //net path
-        
+
         soundPath = "http://18.191.23.16/musicServer/files/"+musicButton.GetComponent<Button>().GetComponentInChildren<Text>().text;
     }
+
     void Update(){
         soundPath = "http://18.191.23.16/musicServer/files/"+musicButton.GetComponent<Button>().GetComponentInChildren<Text>().text;
     }
 
+
     public void playMusic()
     {   
         Debug.Log(soundPath);
-        StartCoroutine(LoadAudio());
-        
+        StartCoroutine(LoadAudio());    
     }
 
     private IEnumerator LoadAudio()

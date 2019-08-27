@@ -1,4 +1,25 @@
-﻿using System;
+﻿/* 
+ * ------------------------------------------------------------------------------------------
+ *                                        _____ _                     _                _    _ 
+ *     /\                                / ____| |                   | |              | |  (_)
+ *    /  \   _ __ ___   ___  _   _ ___  | |    | |__   ___   ___ ___ | | _____   _____| | ___ 
+ *   / /\ \ | '_ ` _ \ / _ \| | | / __| | |    | '_ \ / _ \ / __/ _ \| |/ _ \ \ / / __| |/ / |
+ *  / ____ \| | | | | | (_) | |_| \__ \ | |____| | | | (_) | (_| (_) | | (_) \ V /\__ \   <| |
+ * /_/    \_\_| |_| |_|\___/ \__,_|___/  \_____|_| |_|\___/ \___\___/|_|\___/ \_/ |___/_|\_\_|           
+ *                                                                                                                                                                          
+ * <AmousQiu@dal.ca> wrote this file. As long as you retain this notice you
+ * can do whatever you want with this stuff. If we meet some day, and you think this stuff is
+ * worth it, you can buy me a beer in return (Personal prefer Garrison Raspberry).
+ *                                                                        @Copyright Ziyu Qiu
+ * ------------------------------------------------------------------------------------------
+ */
+
+/*FILE INTRODUTION PART 
+  * ------------------------------------------------------------------------------------------
+  *FileName: SavWav.cs
+  *Function: -
+*/
+using System;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -8,7 +29,7 @@ public static class SavWav
     private const uint HeaderSize = 44;
     private const float RescaleFactor = 32767; //to convert float to Int16
 
-
+//Save the wav file to local
     public static void Save(string filename, AudioClip clip, bool trim = false)
     {
         if (!filename.ToLower().EndsWith(".wav"))
@@ -17,7 +38,6 @@ public static class SavWav
         }
         var filepath = Path.Combine(Application.persistentDataPath, filename);
 
-        //var filepath = Path.Combine(Application.dataPath + "/Audio/", filename);
         Debug.Log(filepath);
         // Make sure directory exists if user is saving to sub dir.
         Directory.CreateDirectory(Path.GetDirectoryName(filepath));
@@ -27,29 +47,34 @@ public static class SavWav
         {
             var wav = GetWav(clip, out var length, trim);
             writer.Write(wav, 0, (int)length);
-            //upload(wav);
-            //System.IO.File.WriteAllBytes(filepath,wav);
         }
 
     }
 
+
     public static string uploadToServer(string filename, AudioClip clip, bool trim = false)
     {
+        //Convert clip to wav file
         var wav = GetWav(clip, out var length, trim);
+         
+        //return a message from InsertIntoDB to see if duplicate or not.
         string result=insertIntoDB(filename, wav);
         return result;
     }
 
 
+    //upload to UnityUpload.php 
     public static void upload(byte[] musicbytes, string filename)
     {
         string url = "http://18.191.23.16/musicServer/UnityUpload.php";
         WWWForm form = new WWWForm();
+        //"Name" and "post" are specific term accroding to UnityUpload.php file
         form.AddField("Name", filename);
         form.AddBinaryData("post", musicbytes);
         WWW www = new WWW(url, form);
     }
 
+    //Insert into database through InsertData.php
     public static string insertIntoDB(string filename, byte[] musicbytes)
     {
         string result="";
@@ -61,7 +86,6 @@ public static class SavWav
         {
             Debug.Log(www.error);
         }
-
         else
         {
             while (!www.isDone)
@@ -86,7 +110,7 @@ public static class SavWav
 
 
 
-
+// Converting part.
     public static byte[] GetWav(AudioClip clip, out uint length, bool trim = false)
     {
         var data = ConvertAndWrite(clip, out length, out var samples, trim);
